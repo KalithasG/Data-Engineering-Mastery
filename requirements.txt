@@ -1,0 +1,6 @@
+# Phase 1 dependencies — pinned to the versions these projects were verified with.
+pandas==3.0.3
+duckdb==1.5.4
+pyarrow==25.0.0
+numpy==2.4.6
+pytest==9.1.1

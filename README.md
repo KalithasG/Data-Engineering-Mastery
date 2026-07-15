@@ -50,6 +50,26 @@ These are deliberately **not** in this repo — the guided projects + explainers
 
 ---
 
+## 🔧 Phase 2 — Core ETL Pipeline Engineering
+
+**Agenda:** move from modeling static data to *engineering the pipelines that move it* — loading only what changed, joining messy multi-source data safely, making re-runs safe, and gating quality automatically.
+
+| # | Guided Project | Core Concepts | Dataset (shape) | Status |
+|---|---|---|---|---|
+| **2.1** | [Incremental ETL with NYC Taxi](phase-2-core-etl/project-2.1-incremental-nyc-taxi/) | Chunked extraction, watermark incremental load, partitioned Parquet, retry/backoff, lookback, idempotency | NYC taxi trips (2 batches) | ✅ Runs, 5 tests, benchmark |
+| **2.2** | [Multi-source ETL with Flight Delays](phase-2-core-etl/project-2.2-multisource-flights/) | Multi-source joins, join cardinality, INNER vs LEFT, NULL semantics, SQLAlchemy bulk load | Flights + airlines + airports | ✅ Runs, 5 queries, reconciled |
+| **2.3** | [Append-Only Pipeline with Chicago Crime](phase-2-core-etl/project-2.3-append-only-chicago-crime/) | Record hashing, dedup, append-only ingest, immutable audit log, at-least-once → exactly-once | Chicago crime (3 overlapping batches) | ✅ Runs, 7 tests |
+| **2.4** | [Data Quality Framework with Play Store](phase-2-core-etl/project-2.4-quality-framework-playstore/) | Declarative expectations, severity tiers (hard-fail/soft/quarantine), volume checks, HTML report, CI gate | Google Play Store apps | ✅ Runs, 7 tests, exit-code gate |
+
+### ✍️ Your Phase 2 solo assignments (do these yourself)
+
+- [ ] **Assignment 2.1** — Watermark incremental loader for **Chicago Divvy bikeshare** (control table, prove idempotency, simulate crash mid-load, lookback window, when-to-CDC write-up) → prep: [2.1 EXPLANATION](phase-2-core-etl/project-2.1-incremental-nyc-taxi/EXPLANATION.md)
+- [ ] **Assignment 2.2** — Multi-source merge with conflicting data for **Craigslist used cars** (state cardinality, reconcile row counts, classify ≥5 columns' nulls, conflict-resolution rule + `_data_quality_flag`, INNER-vs-LEFT row diff) → prep: [2.2 EXPLANATION](phase-2-core-etl/project-2.2-multisource-flights/EXPLANATION.md)
+- [ ] **Assignment 2.3** — Provably-idempotent audit pipeline (all three idempotency techniques, load-twice test, at-least-once ×3, immutable audit log, exactly-once write-up) → prep: [2.3 EXPLANATION](phase-2-core-etl/project-2.3-append-only-chicago-crime/EXPLANATION.md)
+- [ ] **Assignment 2.4** — Quality gate for **Amazon/Zomato** catalog (≥12 expectations across 6 categories, volume check on a bad batch, three-tier response, HTML report, one-page data contract) → prep: [2.4 EXPLANATION](phase-2-core-etl/project-2.4-quality-framework-playstore/EXPLANATION.md)
+
+---
+
 ## 🚀 Quick Start
 
 ```bash
@@ -71,6 +91,10 @@ Per-project run commands:
 | **1.1** | `python generate_sample_data.py && python build_star_schema.py && python run_queries.py` |
 | **1.2** | `python generate_sample_data.py && python run_pipeline.py && pytest -q` |
 | **1.3** | `python generate_sample_data.py && python scd_pipeline.py && python demo_queries.py` |
+| **2.1** | `python generate_sample_data.py && python taxi_etl.py && python benchmark.py && pytest -q` |
+| **2.2** | `python generate_sample_data.py && python flight_etl.py && python run_queries.py` |
+| **2.3** | `python generate_sample_data.py && python crime_ingest.py && pytest -q` |
+| **2.4** | `python generate_sample_data.py && python run_quality.py; pytest -q` |
 
 > **Using the real Kaggle datasets instead?** Every project reads from `data/raw/`. Drop the real CSVs there (matching the column names the generator produces) and skip `generate_sample_data.py` — the rest of the pipeline is identical.
 
@@ -102,6 +126,13 @@ Data-Engineering-Mastery/
         ├── generate_sample_data.py
         ├── scd_pipeline.py
         └── demo_queries.py
+
+phase-2-core-etl/
+    ├── project-2.1-incremental-nyc-taxi/     (taxi_etl.py, benchmark.py, test_taxi_etl.py)
+    ├── project-2.2-multisource-flights/      (flight_etl.py, analytical_queries.sql, run_queries.py)
+    ├── project-2.3-append-only-chicago-crime/(crime_ingest.py, test_crime_ingest.py)
+    └── project-2.4-quality-framework-playstore/ (dq_framework.py, run_quality.py, test_dq_framework.py)
+        # every project also has: generate_sample_data.py, README.md, EXPLANATION.md
 ```
 
 Data files are `.gitignore`d — they're regenerable, so the repo stays lean. Run each project's `generate_sample_data.py` to recreate them.
@@ -110,8 +141,8 @@ Data files are `.gitignore`d — they're regenerable, so the repo stays lean. Ru
 
 ## 🧭 Roadmap (from the Playbook)
 
-- ✅ **Phase 1 — Foundation:** Data Modeling & Cleaning *(this repo)*
-- ⏳ **Phase 2 — Core ETL:** incremental loading, multi-source joins, idempotency, quality frameworks
+- ✅ **Phase 1 — Foundation:** Data Modeling & Cleaning
+- ✅ **Phase 2 — Core ETL:** incremental loading, multi-source joins, idempotency, quality frameworks
 - ⏳ **Phase 3 — Warehousing:** medallion architecture, dbt, analytical SQL
 - ⏳ **Phase 4 — Distributed:** PySpark, Delta Lake, wide-to-long
 - ⏳ **Phase 5 — Streaming:** Kafka, micro-batch, event time & watermarks

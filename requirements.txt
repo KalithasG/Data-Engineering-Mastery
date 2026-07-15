@@ -1,7 +1,9 @@
-# Phase 1 (Foundation) dependencies — versions pinned to what these projects
-# were built and verified against.
+# Phase 1–2 dependencies — versions pinned to what these projects were built
+# and verified against.
 pandas==3.0.3
 duckdb==1.5.4
 pyarrow==25.0.0
 numpy==2.4.6
 pytest==9.1.1
+# Phase 2 adds SQLAlchemy (Project 2.2 bulk DB load; SQLite driver is stdlib).
+sqlalchemy==2.0.51

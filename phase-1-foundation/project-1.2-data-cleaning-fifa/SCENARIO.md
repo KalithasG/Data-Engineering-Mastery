@@ -12,7 +12,22 @@ Your tech lead assigns you this ticket:
 
 > **Replace the hand-fixing with a reusable, auditable, re-runnable cleaning pipeline that turns the raw export into a validated Parquet file — every month, with zero manual steps.**
 
-Before writing any code, you must be able to answer — and your implementation must then prove:
+## 📊 Business questions the stakeholders need answered
+
+Your clients can't compute ANY of these on the raw export — each one is blocked by a specific mess pattern. Clean data must unblock all of them:
+
+| Stakeholder | Business question | Blocked by |
+|---|---|---|
+| **Scouting clients** | Who are the top-N most valuable players per position, and what's the total squad value per club? | `value_eur` is the string `€105.5M` — can't SUM or rank |
+| **Scouting clients** | Which players' *true* current rating (base + form modifier) is highest? | ratings like `90+2` are text |
+| **Betting clients** | What's the value-vs-wage efficiency by club and nationality? | currency strings + `  BRAZIL ` vs `Brazil` double-counts groups |
+| **Analysts** | How does market value trend with tenure (time since joining)? | `joined_date` mixes 3 formats — can't sort or diff dates |
+| **Account managers** | Exact player counts per club/nationality for licensing invoices | duplicate rows inflate counts; free agents (`club = NULL`) must count as a real segment, not be dropped |
+| **Data governance** | "How trustworthy is this month's export?" | no audit trail exists — your quality report becomes the answer |
+
+Every cleaning step you build should trace back to unblocking one of these.
+
+## What you must work out (and your implementation must prove)
 
 1. **Classify the dirt:** For each mess pattern (currency strings, composite ratings, mixed dates, casing noise, duplicates, null club, null value) — **which of the 6 data-quality dimensions** (completeness, validity, consistency, uniqueness, accuracy, timeliness) does it violate?
 2. **Systematic parsers:** Why must `€105.5M → 105_500_000` be handled by **one parser function** rather than hand fixes? What should a parser return for garbage input — raise, or `None` + log — and why?

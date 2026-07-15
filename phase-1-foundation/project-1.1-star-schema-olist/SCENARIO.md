@@ -12,7 +12,23 @@ Your tech lead assigns you this ticket:
 
 > **Build our first analytical star schema in DuckDB so any analyst can answer revenue/delivery/category questions with a single join.**
 
-Before writing any code, you must be able to answer — and your implementation must then prove:
+## 📊 Business questions the stakeholders need answered
+
+Your schema exists to serve these asks — design for them, then prove them with your 10 queries:
+
+| Stakeholder | Business question |
+|---|---|
+| **CFO** | Which states generate the most revenue, and what's the month-over-month and quarter-over-quarter growth trend? |
+| **CFO** | How much revenue are we losing to cancelled orders each month? |
+| **Category manager** | Which product categories drive revenue — and which have freight costs eating an outsized share of the item price? |
+| **Logistics lead** | What's the average delivery time per state, and where are we slowest? |
+| **Marketing** | Do customers buy differently on weekends vs weekdays (order counts, basket value)? |
+| **Marketplace ops** | Which seller states host the most active, highest-revenue sellers? |
+| **Marketplace ops** | How are orders distributed by size (items per order), and how much revenue comes from multi-item orders? |
+
+If any of these needs more than **one join hop** from your fact table, your model isn't done.
+
+## What you must work out (and your implementation must prove)
 
 1. **Profiling:** What does each of the 8 files contain, what does one row of each represent, and which columns link them? Is `customer_id` actually unique? How many items does a typical order have (what's the real cardinality)? How many products have no category?
 2. **Grain:** What will **one row of your fact table** represent — an order, or an item within an order? Why is the lower grain safer? Where will you declare it?

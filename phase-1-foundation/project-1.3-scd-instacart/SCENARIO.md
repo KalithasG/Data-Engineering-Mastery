@@ -14,7 +14,22 @@ Your tech lead assigns you this ticket:
 
 > **Make historical reports stop changing: track product history with Slowly Changing Dimensions, and make every order join to the product version that was true on the order date.**
 
-Before writing any code, you must be able to answer — and your implementation must then prove:
+## 📊 Business questions the stakeholders need answered
+
+Each of these is *impossible* (or silently wrong) with an update-in-place catalog — your SCD design must make them all answerable:
+
+| Stakeholder | Business question | Why update-in-place fails |
+|---|---|---|
+| **Finance** | What was January's revenue **at the prices we actually charged** in January? | recomputing with today's prices restates closed books |
+| **Finance** | How much revenue did last quarter's price changes add or lose? | needs price-before vs price-after per product — history is gone |
+| **Merchandising** | Revenue by department *as departments were defined at the time* — did moving frozen pizza to "frozen" shift performance, or just relabel it? | re-categorization rewrites all history to the new department |
+| **Merchandising** | Which products changed department or price this quarter, and what's each product's full change timeline? | no versions = no timeline |
+| **Pricing team** | What did product X cost on any given past date? | only the current price survives |
+| **Catalog ops** | What's the *current* catalog (one clean row per product), typo-free? | needs current-state view AND typo fixes that don't pollute history |
+
+The point-in-time join (question 7 below) is what makes every row of this table answerable.
+
+## What you must work out (and your implementation must prove)
 
 1. **Why SCD exists:** What exactly is lost when you UPDATE a dimension in place, and which of finance's two bugs does it explain?
 2. **All three types:** Implement SCD **Type 1** (overwrite), **Type 2** (new row per version), and **Type 3** (previous-value column) side by side. When is each the right tool, and what can each *not* answer?

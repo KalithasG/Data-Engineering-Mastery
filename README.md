@@ -36,17 +36,18 @@ The guided projects here are step 2. The `EXPLANATION.md` files are your bridge 
 | **1.3** | [Slowly Changing Dimensions with Instacart](phase-1-foundation/project-1.3-scd-instacart/) | SCD Type 1/2/3, merge/upsert, effective dates, point-in-time joins, hybrid SCD | Instacart catalog (3 monthly snapshots) | ✅ Runs, point-in-time verified |
 
 ### 📚 Study path for each project
+0. Read **`QUESTIONS.md`** first — the framing questions ("what are we expecting from this dataset?") *before* you look at any code.
 1. Read the project's **`README.md`** — what it builds and the design decisions.
 2. Run it (see below) and inspect the output.
 3. Read the **`EXPLANATION.md`** — the line-by-line walkthrough.
-4. Do the matching **solo assignment** from the playbook, on your own.
+4. Do the matching **solo assignment** from the playbook, on your own — start from its questions doc in [`assignments/`](assignments/).
 
 ### ✍️ Your Phase 1 solo assignments (do these yourself)
 These are deliberately **not** in this repo — the guided projects + explainers prepare you to build them unaided. Each explainer ends with a checklist mapping what you learned to the assignment.
 
-- [ ] **Assignment 1.1** — Star schema for **Global Superstore** (grain, ≥4 dims, `dim_date` with fiscal quarter + holidays, a non-additive measure, fan-trap write-up) → prep: [1.1 EXPLANATION](phase-1-foundation/project-1.1-star-schema-olist/EXPLANATION.md)
-- [ ] **Assignment 1.2** — Cleaning class for **Netflix** catalog (split `duration` by content type, multi-value `listed_in`/`cast`, MCAR/MAR/MNAR diagnosis, quality report, idempotency test) → prep: [1.2 EXPLANATION](phase-1-foundation/project-1.2-data-cleaning-fifa/EXPLANATION.md)
-- [ ] **Assignment 1.3** — Employee history with SCD Type 2 for **IBM HR** (3 simulated batches, per-attribute Type 1 vs 2, point-in-time proof, **late-arriving correction**) → prep: [1.3 EXPLANATION](phase-1-foundation/project-1.3-scd-instacart/EXPLANATION.md)
+- [ ] **Assignment 1.1** — Star schema for **Global Superstore** (grain, ≥4 dims, `dim_date` with fiscal quarter + holidays, a non-additive measure, fan-trap write-up) → **questions**: [assignments/1.1](assignments/assignment-1.1-global-superstore-QUESTIONS.md) · prep: [1.1 EXPLANATION](phase-1-foundation/project-1.1-star-schema-olist/EXPLANATION.md)
+- [ ] **Assignment 1.2** — Cleaning class for **Netflix** catalog (split `duration` by content type, multi-value `listed_in`/`cast`, MCAR/MAR/MNAR diagnosis, quality report, idempotency test) → **questions**: [assignments/1.2](assignments/assignment-1.2-netflix-QUESTIONS.md) · prep: [1.2 EXPLANATION](phase-1-foundation/project-1.2-data-cleaning-fifa/EXPLANATION.md)
+- [ ] **Assignment 1.3** — Employee history with SCD Type 2 for **IBM HR** (3 simulated batches, per-attribute Type 1 vs 2, point-in-time proof, **late-arriving correction**) → **questions**: [assignments/1.3](assignments/assignment-1.3-ibm-hr-scd-QUESTIONS.md) · prep: [1.3 EXPLANATION](phase-1-foundation/project-1.3-scd-instacart/EXPLANATION.md)
 
 ---
 
@@ -63,10 +64,10 @@ These are deliberately **not** in this repo — the guided projects + explainers
 
 ### ✍️ Your Phase 2 solo assignments (do these yourself)
 
-- [ ] **Assignment 2.1** — Watermark incremental loader for **Chicago Divvy bikeshare** (control table, prove idempotency, simulate crash mid-load, lookback window, when-to-CDC write-up) → prep: [2.1 EXPLANATION](phase-2-core-etl/project-2.1-incremental-nyc-taxi/EXPLANATION.md)
-- [ ] **Assignment 2.2** — Multi-source merge with conflicting data for **Craigslist used cars** (state cardinality, reconcile row counts, classify ≥5 columns' nulls, conflict-resolution rule + `_data_quality_flag`, INNER-vs-LEFT row diff) → prep: [2.2 EXPLANATION](phase-2-core-etl/project-2.2-multisource-flights/EXPLANATION.md)
-- [ ] **Assignment 2.3** — Provably-idempotent audit pipeline (all three idempotency techniques, load-twice test, at-least-once ×3, immutable audit log, exactly-once write-up) → prep: [2.3 EXPLANATION](phase-2-core-etl/project-2.3-append-only-chicago-crime/EXPLANATION.md)
-- [ ] **Assignment 2.4** — Quality gate for **Amazon/Zomato** catalog (≥12 expectations across 6 categories, volume check on a bad batch, three-tier response, HTML report, one-page data contract) → prep: [2.4 EXPLANATION](phase-2-core-etl/project-2.4-quality-framework-playstore/EXPLANATION.md)
+- [ ] **Assignment 2.1** — Watermark incremental loader for **Chicago Divvy bikeshare** (control table, prove idempotency, simulate crash mid-load, lookback window, when-to-CDC write-up) → **questions**: [assignments/2.1](assignments/assignment-2.1-divvy-incremental-QUESTIONS.md) · prep: [2.1 EXPLANATION](phase-2-core-etl/project-2.1-incremental-nyc-taxi/EXPLANATION.md)
+- [ ] **Assignment 2.2** — Multi-source merge with conflicting data for **Craigslist used cars** (state cardinality, reconcile row counts, classify ≥5 columns' nulls, conflict-resolution rule + `_data_quality_flag`, INNER-vs-LEFT row diff) → **questions**: [assignments/2.2](assignments/assignment-2.2-craigslist-cars-QUESTIONS.md) · prep: [2.2 EXPLANATION](phase-2-core-etl/project-2.2-multisource-flights/EXPLANATION.md)
+- [ ] **Assignment 2.3** — Provably-idempotent audit pipeline (all three idempotency techniques, load-twice test, at-least-once ×3, immutable audit log, exactly-once write-up) → **questions**: [assignments/2.3](assignments/assignment-2.3-audit-pipeline-QUESTIONS.md) · prep: [2.3 EXPLANATION](phase-2-core-etl/project-2.3-append-only-chicago-crime/EXPLANATION.md)
+- [ ] **Assignment 2.4** — Quality gate for **Amazon/Zomato** catalog (≥12 expectations across 6 categories, volume check on a bad batch, three-tier response, HTML report, one-page data contract) → **questions**: [assignments/2.4](assignments/assignment-2.4-amazon-zomato-quality-QUESTIONS.md) · prep: [2.4 EXPLANATION](phase-2-core-etl/project-2.4-quality-framework-playstore/EXPLANATION.md)
 
 ---
 
@@ -132,7 +133,11 @@ phase-2-core-etl/
     ├── project-2.2-multisource-flights/      (flight_etl.py, analytical_queries.sql, run_queries.py)
     ├── project-2.3-append-only-chicago-crime/(crime_ingest.py, test_crime_ingest.py)
     └── project-2.4-quality-framework-playstore/ (dq_framework.py, run_quality.py, test_dq_framework.py)
-        # every project also has: generate_sample_data.py, README.md, EXPLANATION.md
+        # every project also has: QUESTIONS.md, README.md, EXPLANATION.md, generate_sample_data.py
+
+assignments/                          <- framing questions for the SOLO assignments (no code)
+    ├── README.md                     index + how to use
+    └── assignment-{1.1..2.4}-*-QUESTIONS.md
 ```
 
 Data files are `.gitignore`d — they're regenerable, so the repo stays lean. Run each project's `generate_sample_data.py` to recreate them.

@@ -6,6 +6,26 @@
 
 ---
 
+## 📊 Business questions your clean data must unblock
+
+You're the DE for a content-strategy team. Each ask below is currently blocked by dirt in the raw catalog — your cleaner must unblock all of them:
+
+| Stakeholder | Business question |
+|---|---|
+| **Content strategy** | How has catalog growth (titles **added** per month/year) trended, split movies vs TV? |
+| **Content strategy** | What's the average movie *length in minutes* vs average show *season count* — and how do they trend by release year? |
+| **Acquisition team** | Which **genres** dominate the catalog, with correct counts per genre? |
+| **Acquisition team** | Who are the most prolific directors and most-featured actors? |
+| **Regional teams** | Catalog composition and maturity-rating mix by **country** |
+| **Compliance** | Exact, duplicate-free title counts per rating category |
+
+Before designing, ask yourself:
+- [ ] Which mess pattern blocks *each* ask? (e.g. duration mixing `"90 min"`/`"2 Seasons"` blocks the length question; multi-value `listed_in` breaks genre counts if not exploded; `date_added` needs parsing for the growth trend)
+- [ ] For the genre and actor asks — what happens to counts if you *don't* explode the multi-value columns?
+- [ ] Which asks tolerate a null (`director` unknown) vs which need a labelled category?
+
+---
+
 ## Framing questions to answer first
 
 ### Understand the data

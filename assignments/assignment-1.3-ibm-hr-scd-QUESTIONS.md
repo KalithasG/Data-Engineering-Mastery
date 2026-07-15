@@ -6,6 +6,26 @@
 
 ---
 
+## 📊 Business questions your history tracking must answer
+
+You're the DE for a People-Analytics team. Every ask below is impossible (or silently wrong) if the employee table is updated in place — your SCD design must make them all answerable:
+
+| Stakeholder | Business question |
+|---|---|
+| **HR leadership** | Headcount by department **as it was on any past date** — not restated by later transfers |
+| **HR leadership** | Attrition rate by the department the employee was in **at the time they left** |
+| **Finance** | Monthly compensation cost trend at the salaries **actually paid each month**, not today's salaries |
+| **Comp & benefits** | Each employee's full salary/role change timeline — who got promoted, when, from what to what? |
+| **Org planning** | Who moved departments this quarter, and what do internal-mobility flows look like? |
+| **HRBP (data fix)** | "This transfer actually happened two months ago — backdate it **without corrupting** the reports in between" |
+
+Before designing, ask yourself:
+- [ ] Which of these needs the point-in-time join, and which only needs `is_current`?
+- [ ] Which ask decides whether MonthlyIncome is Type 1 or Type 2? What about a name-spelling fix?
+- [ ] Which ask is the **late-arriving correction** — and what must stay true of your date ranges after you handle it?
+
+---
+
 ## Framing questions to answer first
 
 ### Simulate change

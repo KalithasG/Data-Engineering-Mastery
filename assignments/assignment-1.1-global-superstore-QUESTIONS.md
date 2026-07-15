@@ -6,6 +6,26 @@
 
 ---
 
+## 📊 Business questions your schema must answer
+
+You're the DE for a global retailer. These stakeholder asks are your requirements — design the schema *for them*, then prove them with your 8 queries:
+
+| Stakeholder | Business question |
+|---|---|
+| **CFO** | Revenue and **profit** by market/region, with year-over-year growth — and where is profit *negative* despite high sales? |
+| **Category manager** | Which categories/sub-categories drive profit, and how much does **discounting** erode margin per category? |
+| **Logistics lead** | Shipping cost and order-to-ship lag by ship mode — is same-day/first-class worth it? |
+| **Regional managers** | Top customers and segments per region; weekday vs weekend ordering behavior |
+| **Finance (fiscal)** | All of the above sliceable by **fiscal quarter**, not just calendar quarter |
+
+Before designing, ask yourself:
+- [ ] Which dimension and which fact column serves *each* ask above?
+- [ ] Which ask forces `dim_date` to carry `fiscal_quarter` and `is_holiday`?
+- [ ] Profit *margin* appears in two asks — is it additive? How must it be computed at every level?
+- [ ] Can every ask be answered with **one join hop**? If not, the model isn't done.
+
+---
+
 ## Framing questions to answer first
 
 ### Understand the data

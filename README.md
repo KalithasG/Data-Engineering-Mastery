@@ -28,11 +28,14 @@ Then prove the skill transfers: do the matching **solo assignment** (questions i
 ## 📋 Full Agenda — all phases of the playbook
 
 ### ✅ Phase 1 — Foundation: Data Modeling & Cleaning *(built — start here)*
-| Project | Scenario | Skills | Kaggle dataset |
-|---|---|---|---|
-| [1.1 Star Schema](phase-1-foundation/project-1.1-star-schema-olist/SCENARIO.md) | Build the analytics warehouse for an e-commerce marketplace | Dimensional modeling, grain, surrogate keys, star schema, fan traps | Olist Brazilian E-Commerce |
-| [1.2 Data Cleaning](phase-1-foundation/project-1.2-data-cleaning-fifa/SCENARIO.md) | Replace hand-fixed Excel cleaning with an auditable pipeline | 6 quality dimensions, systematic parsers, MCAR/MAR/MNAR, idempotency | FIFA 19 players |
-| [1.3 SCD](phase-1-foundation/project-1.3-scd-instacart/SCENARIO.md) | Stop historical reports from rewriting themselves | SCD Type 1/2/3, merge logic, point-in-time joins | Instacart Market Basket |
+
+*Click a project to open its directory with all files; the 🎫 link jumps straight to its scenario.*
+
+| Project (directory) | Start | Scenario | Skills | Kaggle dataset |
+|---|---|---|---|---|
+| [1.1 Star Schema](phase-1-foundation/project-1.1-star-schema-olist/) | [🎫](phase-1-foundation/project-1.1-star-schema-olist/SCENARIO.md) | Build the analytics warehouse for an e-commerce marketplace | Dimensional modeling, grain, surrogate keys, star schema, fan traps | Olist Brazilian E-Commerce |
+| [1.2 Data Cleaning](phase-1-foundation/project-1.2-data-cleaning-fifa/) | [🎫](phase-1-foundation/project-1.2-data-cleaning-fifa/SCENARIO.md) | Replace hand-fixed Excel cleaning with an auditable pipeline | 6 quality dimensions, systematic parsers, MCAR/MAR/MNAR, idempotency | FIFA 19 players |
+| [1.3 SCD](phase-1-foundation/project-1.3-scd-instacart/) | [🎫](phase-1-foundation/project-1.3-scd-instacart/SCENARIO.md) | Stop historical reports from rewriting themselves | SCD Type 1/2/3, merge logic, point-in-time joins | Instacart Market Basket |
 
 **Solo assignments (you build, on real Kaggle data):** [1.1 Global Superstore](assignments/assignment-1.1-global-superstore-QUESTIONS.md) · [1.2 Netflix](assignments/assignment-1.2-netflix-QUESTIONS.md) · [1.3 IBM HR](assignments/assignment-1.3-ibm-hr-scd-QUESTIONS.md)
 
